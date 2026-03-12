@@ -284,19 +284,19 @@ Use Case и Component диаграммы открываются в [draw.io](htt
 ### Диаграммы последовательностей
 
 #### Регистрация пользователя
-![seq-registration](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-registration.puml)
+![seq-registration](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/tasks/3_Diagramms/seq-registration.puml)
 
 #### Добавление товара в корзину
-![seq-cart](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-cart.puml)
+![seq-cart](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/tasks/3_Diagramms/seq-cart.puml)
 
 #### Оформление заказа и оплата
-![seq-checkout](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-checkout.puml)
+![seq-checkout](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/tasks/3_Diagramms/seq-checkout.puml)
 
 #### Просмотр каталога с фильтрами
-![seq-catalog](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-catalog.puml)
+![seq-catalog](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/tasks/3_Diagramms/seq-catalog.puml)
 
 #### JWT Авторизация
-![seq-auth](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-auth.puml)
+![seq-auth](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/tasks/3_Diagramms/seq-auth.puml)
 
 ---
 

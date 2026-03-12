@@ -269,17 +269,34 @@ ALLOWED_ORIGINS=http://localhost:5173
 
 ## 📐 Диаграммы
 
-Все диаграммы находятся в папке `/docs` и открываются в [draw.io](https://app.diagrams.net):
+Use Case и Component диаграммы открываются в [draw.io](https://app.diagrams.net):
 
 | Файл | Тип | Описание |
 |---|---|---|
-| `usecase-diagram.drawio` | Use Case | Акторы: Гость, Покупатель, Администратор |
-| `component-diagram.drawio` | Component | 4 слоя: Frontend → Backend → Services → DB |
-| `seq-registration.drawio` | Sequence | Регистрация пользователя |
-| `seq-cart.drawio` | Sequence | Добавление товара в корзину |
-| `seq-checkout.drawio` | Sequence | Оформление заказа и оплата |
-| `seq-catalog.drawio` | Sequence | Просмотр каталога с фильтрами |
-| `seq-auth.drawio` | Sequence | JWT авторизация |
+| `3_Diagramms/usecase-diagram.drawio` | Use Case | Акторы: Гость, Покупатель, Администратор |
+| `3_Diagramms/component-diagram.drawio` | Component | 4 слоя: Frontend → Backend → Services → DB |
+| `3_Diagramms/seq-registration.puml` | Sequence | Регистрация пользователя |
+| `3_Diagramms/seq-cart.puml` | Sequence | Добавление товара в корзину |
+| `3_Diagramms/seq-checkout.puml` | Sequence | Оформление заказа и оплата |
+| `3_Diagramms/seq-catalog.puml` | Sequence | Просмотр каталога с фильтрами |
+| `3_Diagramms/seq-auth.puml` | Sequence | JWT авторизация |
+
+### Диаграммы последовательностей
+
+#### Регистрация пользователя
+![seq-registration](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-registration.puml)
+
+#### Добавление товара в корзину
+![seq-cart](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-cart.puml)
+
+#### Оформление заказа и оплата
+![seq-checkout](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-checkout.puml)
+
+#### Просмотр каталога с фильтрами
+![seq-catalog](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-catalog.puml)
+
+#### JWT Авторизация
+![seq-auth](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/gt78478/nanit_practice-Yun/main/3_Diagramms/seq-auth.puml)
 
 ---
 

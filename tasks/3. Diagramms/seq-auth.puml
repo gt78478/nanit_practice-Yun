@@ -1,0 +1,64 @@
+@startuml seq-auth
+title JWT Авторизация
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 8
+skinparam maxmessagesize 200
+skinparam sequenceParticipant underline
+
+skinparam participant {
+    BackgroundColor #EFF6FF
+    BorderColor #3B82F6
+    FontColor #000000
+    FontSize 13
+    FontStyle bold
+}
+skinparam arrow {
+    Color #555555
+    FontColor #000000
+    FontSize 12
+}
+skinparam sequence {
+    LifeLineBorderColor #BBBBBB
+    DividerBackgroundColor #F3F4F6
+    DividerBorderColor #CCCCCC
+    DividerFontColor #555555
+    DividerFontSize 11
+}
+
+participant "Пользователь" as U
+participant "Frontend" as FE
+participant "FastAPI" as BE
+participant "PostgreSQL" as DB
+
+== Вход ==
+
+U -> FE : Вводит email и пароль
+FE -> BE : POST /auth/login { email, password }
+BE -> DB : SELECT user WHERE email = ?
+DB --> BE : { user_id, password_hash, role }
+BE -> BE : Проверить пароль (bcrypt)
+BE -> BE : Создать access_token + refresh_token
+BE --> FE : 200 OK { access_token, refresh_token }
+FE -> FE : Сохранить токены в localStorage
+FE --> U : ✅ Вход выполнен
+
+== Запрос к защищённому роуту ==
+
+U -> FE : Открывает /profile
+FE -> BE : GET /users/me\nAuthorization: Bearer <token>
+BE -> BE : Декодировать и проверить JWT
+BE -> DB : SELECT user WHERE id = 42
+DB --> BE : { profile data }
+BE --> FE : 200 OK { user profile }
+FE --> U : Показывает профиль
+
+== Обновление токена ==
+
+FE -> BE : POST /auth/refresh { refresh_token }
+BE -> BE : Проверить refresh_token
+BE --> FE : { новый access_token }
+FE --> U : Сессия продолжена
+
+@enduml

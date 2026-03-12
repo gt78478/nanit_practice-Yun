@@ -1,0 +1,57 @@
+@startuml seq-checkout
+title Оформление заказа и оплата
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 8
+skinparam maxmessagesize 200
+skinparam sequenceParticipant underline
+
+skinparam participant {
+    BackgroundColor #EFF6FF
+    BorderColor #3B82F6
+    FontColor #000000
+    FontSize 13
+    FontStyle bold
+}
+skinparam arrow {
+    Color #555555
+    FontColor #000000
+    FontSize 12
+}
+skinparam sequence {
+    LifeLineBorderColor #BBBBBB
+    DividerBackgroundColor #F3F4F6
+    DividerBorderColor #CCCCCC
+    DividerFontColor #555555
+    DividerFontSize 11
+}
+
+participant "Пользователь" as U
+participant "Frontend" as FE
+participant "FastAPI" as BE
+participant "PostgreSQL" as DB
+participant "Mercado Pago" as MP
+participant "Email" as EM
+
+U -> FE : Нажимает «Оплатить»
+FE -> BE : POST /orders { address, promo_code }
+BE -> DB : INSERT INTO orders (status = pending)
+DB --> BE : order_id = 301
+BE -> MP : Создать платёж { order_id, amount }
+MP --> BE : { payment_url }
+BE --> FE : { payment_url }
+FE --> U : Редирект на страницу оплаты
+
+U -> MP : Вводит данные карты и оплачивает
+MP --> U : Оплата принята
+
+MP -> BE : Webhook { order_id, status: approved }
+BE -> DB : UPDATE orders SET status = paid
+BE -> DB : Списать товары со склада
+BE ->> EM : Письмо с подтверждением заказа
+BE --> MP : 200 OK
+
+FE --> U : ✅ Заказ №301 оформлен!
+
+@enduml

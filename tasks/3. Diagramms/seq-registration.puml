@@ -1,0 +1,48 @@
+@startuml seq-registration
+title Регистрация пользователя
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 8
+skinparam maxmessagesize 200
+skinparam sequenceParticipant underline
+
+skinparam participant {
+    BackgroundColor #EFF6FF
+    BorderColor #3B82F6
+    FontColor #000000
+    FontSize 13
+    FontStyle bold
+}
+skinparam arrow {
+    Color #555555
+    FontColor #000000
+    FontSize 12
+}
+skinparam sequence {
+    LifeLineBorderColor #BBBBBB
+    DividerBackgroundColor #F3F4F6
+    DividerBorderColor #CCCCCC
+    DividerFontColor #555555
+    DividerFontSize 11
+}
+
+participant "Пользователь" as U
+participant "Frontend" as FE
+participant "FastAPI" as BE
+participant "PostgreSQL" as DB
+participant "Email" as EM
+
+U -> FE : Заполняет форму (email, пароль, имя)
+FE -> FE : Валидация на клиенте
+FE -> BE : POST /auth/register
+BE -> DB : Проверить, существует ли email
+DB --> BE : Email свободен
+BE -> DB : INSERT INTO users
+DB --> BE : user_id = 42
+BE -> BE : Создать JWT токены
+BE ->> EM : Письмо с подтверждением
+BE --> FE : 201 Created { access_token }
+FE --> U : ✅ Регистрация успешна
+
+@enduml

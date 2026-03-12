@@ -1,0 +1,56 @@
+@startuml seq-catalog
+title Просмотр каталога с фильтрами
+
+skinparam backgroundColor #FFFFFF
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 8
+skinparam maxmessagesize 200
+skinparam sequenceParticipant underline
+
+skinparam participant {
+    BackgroundColor #EFF6FF
+    BorderColor #3B82F6
+    FontColor #000000
+    FontSize 13
+    FontStyle bold
+}
+skinparam arrow {
+    Color #555555
+    FontColor #000000
+    FontSize 12
+}
+skinparam sequence {
+    LifeLineBorderColor #BBBBBB
+    DividerBackgroundColor #F3F4F6
+    DividerBorderColor #CCCCCC
+    DividerFontColor #555555
+    DividerFontSize 11
+}
+
+participant "Пользователь" as U
+participant "Frontend" as FE
+participant "FastAPI" as BE
+participant "PostgreSQL" as DB
+
+U -> FE : Открывает каталог
+FE -> BE : GET /products?page=1
+BE -> DB : SELECT * FROM products LIMIT 12
+DB --> BE : { products, total: 248 }
+BE --> FE : { products, pages: 21 }
+FE --> U : Показывает 248 товаров
+
+U -> FE : Выбирает фильтры (категория, цена, сортировка)
+FE -> BE : GET /products?category=skincare&price_max=50000
+BE -> DB : SELECT с условиями WHERE + ORDER BY
+DB --> BE : { products, total: 47 }
+BE --> FE : { products, pages: 4 }
+FE --> U : Показывает 47 товаров
+
+U -> FE : Вводит текст в поиск
+FE -> BE : GET /products?search=vitamin+c
+BE -> DB : Полнотекстовый поиск (tsvector)
+DB --> BE : { products, total: 8 }
+BE --> FE : { products }
+FE --> U : Показывает 8 результатов
+
+@enduml

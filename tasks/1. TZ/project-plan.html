@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeautyShop Chile — Project Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --rose: #C9637A;
+    --rose-light: #E8A0B0;
+    --rose-dark: #9B3A52;
+    --gold: #C4924A;
+    --gold-light: #E8C88A;
+    --ink: #1A1218;
+    --ink-soft: #4A3840;
+    --ink-muted: #8A7880;
+    --surface: #FFFFFF;
+    --surface-warm: #FDF5EE;
+    --border: #EDE0D8;
+    --green: #4A8C6A;
+    --green-light: #D4EDE0;
+    --amber: #C47A2A;
+    --amber-light: #FAE8CC;
+    --blue: #3A6A9B;
+    --blue-light: #D4E4F5;
+    --purple: #7A4A9B;
+    --purple-light: #EAD4F5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 60px 60px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--rose-dark) 0%, transparent 70%);
+    opacity: 0.4;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 200px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+    opacity: 0.2;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose-light);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  header h1 span { color: var(--rose-light); }
+  .header-sub {
+    font-size: 15px;
+    color: #9A8E92;
+    max-width: 560px;
+    position: relative;
+  }
+  .header-badges {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .badge {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .badge-rose { background: var(--rose-dark); color: var(--rose-light); }
+  .badge-gold { background: rgba(196,146,74,0.2); color: var(--gold-light); border: 1px solid rgba(196,146,74,0.3); }
+  .badge-mono { background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.12); font-family: 'DM Mono', monospace; font-size: 11px; }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 50px 40px; }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  /* STACK GRID */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 50px;
+  }
+  .stack-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stack-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,18,24,0.08); }
+  .stack-icon { font-size: 24px; margin-bottom: 10px; }
+  .stack-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .stack-desc { font-size: 12px; color: var(--ink-muted); }
+
+  /* MODULE SECTIONS */
+  .modules-section { margin-bottom: 50px; }
+
+  .module-group {
+    margin-bottom: 32px;
+  }
+  .module-group-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .group-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .group-title-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .group-badge {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+  }
+
+  .modules-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .module-item {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.2s;
+  }
+  .module-item:hover { border-color: var(--rose-light); }
+  .module-check {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .module-check:hover { border-color: var(--rose); }
+  .module-check.checked { background: var(--rose); border-color: var(--rose); }
+  .module-check.checked::after { content: '✓'; color: white; font-size: 11px; font-weight: 700; }
+  .module-info { flex: 1; }
+  .module-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .module-detail { font-size: 11.5px; color: var(--ink-muted); line-height: 1.5; }
+  .module-tags { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 5px;
+    letter-spacing: 0.3px;
+  }
+  .tag-be { background: var(--blue-light); color: var(--blue); }
+  .tag-fe { background: var(--green-light); color: var(--green); }
+  .tag-db { background: var(--amber-light); color: var(--amber); }
+  .tag-int { background: var(--purple-light); color: var(--purple); }
+  .tag-sec { background: #FFE4E4; color: #C03030; }
+
+  /* PRIORITY */
+  .priority-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .p-high { background: var(--rose); }
+  .p-mid { background: var(--gold); }
+  .p-low { background: var(--ink-muted); }
+
+  /* DESIGN SECTION */
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-bottom: 50px;
+  }
+  .design-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .design-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .dc-rose::before { background: linear-gradient(90deg, var(--rose), var(--rose-light)); }
+  .dc-gold::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .dc-green::before { background: linear-gradient(90deg, var(--green), #7AC8A0); }
+  .dc-blue::before { background: linear-gradient(90deg, var(--blue), #7AAAE0); }
+  .dc-purple::before { background: linear-gradient(90deg, var(--purple), #B07AE0); }
+  .design-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .design-card ul { list-style: none; }
+  .design-card ul li {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .design-card ul li:last-child { border-bottom: none; }
+  .design-card ul li::before { content: '→'; color: var(--rose); font-size: 11px; flex-shrink: 0; }
+
+  /* PAYMENT SECTION */
+  .payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+    margin-bottom: 50px;
+  }
+  .payment-table th {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 12px 18px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .payment-table td {
+    padding: 12px 18px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-soft);
+  }
+  .payment-table tr:last-child td { border-bottom: none; }
+  .payment-table tr:hover td { background: var(--surface-warm); }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+  .pill-green { background: var(--green-light); color: var(--green); }
+  .pill-yellow { background: var(--amber-light); color: var(--amber); }
+  .pill-blue { background: var(--blue-light); color: var(--blue); }
+
+  /* TIMELINE */
+  .timeline { margin-bottom: 50px; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 20px;
+    margin-bottom: 14px;
+  }
+  .timeline-week {
+    text-align: right;
+    padding-top: 14px;
+  }
+  .week-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--rose);
+    letter-spacing: 1px;
+  }
+  .week-name {
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+  .timeline-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-left: 3px solid var(--rose);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+  }
+  .timeline-card-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .timeline-tasks { font-size: 12px; color: var(--ink-muted); }
+
+  /* I18N */
+  .i18n-box {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .lang-col h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
+  .lang-col p { font-size: 12.5px; color: var(--ink-muted); line-height: 1.7; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: var(--ink-muted);
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* PROGRESS */
+  .progress-bar {
+    background: var(--border);
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--rose), var(--rose-light));
+    transition: width 0.5s;
+  }
+
+  .total-counter {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 40px;
+    padding: 14px 20px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .counter-num { font-size: 22px; font-weight: 500; color: var(--rose); font-family: 'Playfair Display', serif; }
+
+  @media (max-width: 640px) {
+    header { padding: 40px 24px 36px; }
+    .container { padding: 36px 20px; }
+    .i18n-box { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 70px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Учебная практика · Интернет-магазин косметики</div>
+  <h1>BeautyShop <span>Chile</span><br>— Project Plan</h1>
+  <p class="header-sub">Полный список модулей, задач и требований для разработки косметического интернет-магазина, ориентированного на чилийский рынок.</p>
+  <div class="header-badges">
+    <span class="badge badge-rose">FastAPI · PostgreSQL</span>
+    <span class="badge badge-gold">Vanilla JS · HTML/CSS</span>
+    <span class="badge badge-mono">ES · ES-CL</span>
+    <span class="badge badge-mono">Mercado Pago / Stripe</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TECH STACK -->
+  <div class="section-label">01 · Технологический стек</div>
+  <div class="section-title">Инструменты и технологии</div>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="stack-icon">🐍</div>
+      <div class="stack-name">FastAPI (Python)</div>
+      <div class="stack-desc">REST API бэкенд, Pydantic-схемы, Alembic миграции</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🐘</div>
+      <div class="stack-name">PostgreSQL</div>
+      <div class="stack-desc">Основная БД. ORM: SQLAlchemy 2.x async</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🌐</div>
+      <div class="stack-name">Vanilla JS + Vite</div>
+      <div class="stack-desc">Фронтенд без тяжёлых фреймворков, быстрая сборка</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🎨</div>
+      <div class="stack-name">HTML5 + CSS3</div>
+      <div class="stack-desc">Семантическая разметка, CSS Custom Properties, Grid/Flex</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🔑</div>
+      <div class="stack-name">JWT Auth</div>
+      <div class="stack-desc">python-jose, bcrypt, access + refresh токены</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🚀</div>
+      <div class="stack-name">Deploy: Railway / Render</div>
+      <div class="stack-desc">Бесплатный tier для учебных проектов, CI/CD из GitHub</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🛠</div>
+      <div class="stack-name">DBeaver + VSCode</div>
+      <div class="stack-desc">GUI для PostgreSQL + расширения: Pylance, REST Client, ESLint</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">📦</div>
+      <div class="stack-name">Docker (опционально)</div>
+      <div class="stack-desc">docker-compose для локального запуска PostgreSQL</div>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="section-label">02 · Модули системы</div>
+  <div class="section-title">Функциональные блоки</div>
+
+  <div id="totalCounter" class="total-counter">
+    <div><div class="counter-num" id="checkedCount">0</div>отмечено</div>
+    <div style="flex:1">
+      <div style="font-size:12px;margin-bottom:4px;">Прогресс реализации</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+    <div><div class="counter-num" id="totalCount">0</div>всего</div>
+  </div>
+
+  <div class="modules-section">
+
+    <!-- BACKEND -->
+    <div class="module-group">
+      <div class="module-group-title">
+        <div class="group-icon" style="background:#D4E4F5;">🔧</div>
+        <div class="group-title-text">Бэкенд — FastAPI</div>
+        <span class="group-badge" style="background:var(--blue-light);color:var(--blue);">BACKEND</span>
+      </div>
+      <div class="modules-list">
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Auth Module</div>
+            <div class="module-detail">Регистрация, логин, JWT refresh, сброс пароля по email</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span><span class="tag tag-sec">AUTH</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Product Catalog API</div>
+            <div class="module-detail">CRUD продуктов, категорий, фильтрация, поиск, пагинация</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Cart & Session API</div>
+            <div class="module-detail">Корзина для авторизованных (БД) и гостей (localStorage/session)</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Order Management API</div>
+            <div class="module-detail">Создание заказа, история, статусы (pending/paid/shipped/delivered)</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Payment Integration</div>
+            <div class="module-detail">Mercado Pago (приоритет для Чили) + Stripe как резерв</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-int">INTEGRATION</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">User Profile API</div>
+            <div class="module-detail">Данные профиля, адреса доставки, смена пароля, аватар</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Reviews & Ratings API</div>
+            <div class="module-detail">Отзывы к продуктам, звёздный рейтинг, модерация</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Wishlist API</div>
+            <div class="module-detail">Список желаний пользователя, добавление/удаление товаров</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Admin Panel API</div>
+            <div class="module-detail">Управление товарами, заказами, пользователями (роли: admin/user)</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-sec">ROLES</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-low"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Discount & Promo API</div>
+            <div class="module-detail">Промокоды, скидки по категориям, flash-sale таймеры</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-db">PG</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-low"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Email Notifications</div>
+            <div class="module-detail">Подтверждение заказа, статус доставки (SMTP / SendGrid)</div>
+            <div class="module-tags"><span class="tag tag-be">FastAPI</span><span class="tag tag-int">INTEGRATION</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATABASE -->
+    <div class="module-group">
+      <div class="module-group-title">
+        <div class="group-icon" style="background:var(--amber-light);">🗄️</div>
+        <div class="group-title-text">База данных — PostgreSQL</div>
+        <span class="group-badge" style="background:var(--amber-light);color:var(--amber);">DATABASE</span>
+      </div>
+      <div class="modules-list">
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Схема базы данных</div>
+            <div class="module-detail">ERD-диаграмма: users, products, categories, orders, order_items, cart, reviews, addresses</div>
+            <div class="module-tags"><span class="tag tag-db">PostgreSQL</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Alembic Migrations</div>
+            <div class="module-detail">Версионирование схемы БД, rollback миграции</div>
+            <div class="module-tags"><span class="tag tag-db">Alembic</span><span class="tag tag-be">Python</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Seed Data</div>
+            <div class="module-detail">Тестовые данные: 30–50 продуктов косметики, категории, тестовые пользователи</div>
+            <div class="module-tags"><span class="tag tag-db">PostgreSQL</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Индексы и оптимизация</div>
+            <div class="module-detail">Индексы для поиска по названию товара, category_id, user_id в заказах</div>
+            <div class="module-tags"><span class="tag tag-db">PostgreSQL</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRONTEND -->
+    <div class="module-group">
+      <div class="module-group-title">
+        <div class="group-icon" style="background:var(--green-light);">🎨</div>
+        <div class="group-title-text">Фронтенд — JS + HTML/CSS</div>
+        <span class="group-badge" style="background:var(--green-light);color:var(--green);">FRONTEND</span>
+      </div>
+      <div class="modules-list">
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Главная страница (Home)</div>
+            <div class="module-detail">Hero-баннер, бестселлеры, новинки, промо-блоки, CTA</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-fe">JS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Каталог товаров</div>
+            <div class="module-detail">Сетка карточек, фильтры (бренд/тип/цена), сортировка, поиск</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-fe">JS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Страница товара (PDP)</div>
+            <div class="module-detail">Галерея, описание, состав, рейтинг, отзывы, кнопка в корзину</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-fe">JS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Корзина (Cart Page)</div>
+            <div class="module-detail">Список товаров, кол-во, сумма, промокод, кнопка оформить</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-fe">JS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Checkout Flow</div>
+            <div class="module-detail">Форма адреса → выбор доставки → оплата → подтверждение</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-int">PAYMENT</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-high"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Регистрация / Логин</div>
+            <div class="module-detail">Модальное окно или отдельные страницы, валидация форм</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-sec">AUTH</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Личный кабинет</div>
+            <div class="module-detail">История заказов, профиль, адреса, wishlist, смена пароля</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-fe">JS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Header / Navigation</div>
+            <div class="module-detail">Логотип, мега-меню категорий, иконки (корзина/wishlist/профиль), поиск</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-fe">JS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Footer</div>
+            <div class="module-detail">Контакты, соцсети, ссылки (доставка/возврат/о нас), newsletter</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-mid"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">Admin Panel UI</div>
+            <div class="module-detail">Таблицы товаров/заказов, формы добавления, dashboard со статистикой</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span><span class="tag tag-sec">ADMIN</span></div>
+          </div>
+        </div>
+        <div class="module-item">
+          <div class="priority-dot p-low"></div>
+          <div class="module-check" onclick="toggleCheck(this)"></div>
+          <div class="module-info">
+            <div class="module-name">404 / Error Pages</div>
+            <div class="module-detail">Дизайнерские страницы ошибок в стиле магазина</div>
+            <div class="module-tags"><span class="tag tag-fe">HTML/CSS</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /modules-section -->
+
+  <!-- DESIGN -->
+  <div class="section-label">03 · Дизайн и UX</div>
+  <div class="section-title">Визуальная концепция для косметического магазина</div>
+  <div class="design-grid">
+    <div class="design-card dc-rose">
+      <div class="design-card-title">🎨 Цветовая палитра</div>
+      <ul>
+        <li>Основа: пыльная роза + крем-беж</li>
+        <li>Акцент: глубокий бургунди / nude</li>
+        <li>Нейтраль: офф-вайт + тёмный уголь</li>
+        <li>CSS Custom Properties для тем</li>
+        <li>Тёмный режим (опционально)</li>
+      </ul>
+    </div>
+    <div class="design-card dc-gold">
+      <div class="design-card-title">✍️ Типографика</div>
+      <ul>
+        <li>Display: Playfair Display (элегантность)</li>
+        <li>Body: DM Sans / Plus Jakarta Sans</li>
+        <li>Размер: 14–16px base, 32–56px hero</li>
+        <li>Межстрочный: 1.5–1.7 для читаемости</li>
+        <li>Google Fonts — бесплатно</li>
+      </ul>
+    </div>
+    <div class="design-card dc-green">
+      <div class="design-card-title">🖼 Компоненты UI</div>
+      <ul>
+        <li>Карточки товаров с hover-эффектом</li>
+        <li>Слайдеры (Swiper.js / CSS-only)</li>
+        <li>Toast-уведомления (добавлено в корзину)</li>
+        <li>Скелетон-загрузка для каталога</li>
+        <li>Sticky header при скролле</li>
+      </ul>
+    </div>
+    <div class="design-card dc-blue">
+      <div class="design-card-title">📱 Адаптивность</div>
+      <ul>
+        <li>Mobile-first подход</li>
+        <li>Брейкпоинты: 480 / 768 / 1024 / 1280px</li>
+        <li>Hamburger-меню на мобильных</li>
+        <li>Touch-события для слайдеров</li>
+        <li>Тест в Chrome DevTools</li>
+      </ul>
+    </div>
+    <div class="design-card dc-purple">
+      <div class="design-card-title">✨ Анимации & детали</div>
+      <ul>
+        <li>CSS transitions: 200–300ms ease</li>
+        <li>Hover: scale(1.02) на карточках</li>
+        <li>Fade-in при подгрузке каталога</li>
+        <li>Анимация добавления в корзину</li>
+        <li>Smooth scroll между секциями</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PAYMENT -->
+  <div class="section-label">04 · Платёжная система</div>
+  <div class="section-title">Интеграция оплаты — чилийский рынок</div>
+  <table class="payment-table">
+    <thead>
+      <tr>
+        <th>Сервис</th>
+        <th>Приоритет</th>
+        <th>Почему подходит для Чили</th>
+        <th>Сложность интеграции</th>
+        <th>Учебный проект</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mercado Pago</strong></td>
+        <td><span class="pill pill-green">⭐ Первый</span></td>
+        <td>Доминирующая платформа Латинской Америки, поддержка CLP, карты/трансфер/наличные</td>
+        <td><span class="pill pill-green">Средняя</span></td>
+        <td>Sandbox-режим ✓ Python SDK ✓</td>
+      </tr>
+      <tr>
+        <td><strong>Stripe</strong></td>
+        <td><span class="pill pill-yellow">Резерв</span></td>
+        <td>Международные карты, работает в Чили с 2022, отличная документация</td>
+        <td><span class="pill pill-green">Низкая</span></td>
+        <td>Test mode ✓ Отличная документация ✓</td>
+      </tr>
+      <tr>
+        <td><strong>PayPal</strong></td>
+        <td><span class="pill pill-blue">Опционально</span></td>
+        <td>Международная аудитория, доверие пользователей</td>
+        <td><span class="pill pill-yellow">Средняя</span></td>
+        <td>Sandbox ✓ Webhook тесты ✓</td>
+      </tr>
+      <tr>
+        <td><strong>Webpay (Transbank)</strong></td>
+        <td><span class="pill pill-blue">Локально</span></td>
+        <td>Главная чилийская система, обязательна для местного бизнеса</td>
+        <td><span class="pill pill-yellow">Выше средней</span></td>
+        <td>SDK Python ✓ но сложнее тестировать</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- I18N -->
+  <div class="section-label">05 · Локализация</div>
+  <div class="section-title">Язык и региональные настройки</div>
+  <div class="i18n-box">
+    <div class="lang-col">
+      <h4>🌐 Языки интерфейса</h4>
+      <p>
+        Основной язык — <strong>испанский (Чили, es-CL)</strong>. Это включает особенности чилийского испанского: слово «plata» вместо «dinero», обращение «usted» в официальном контексте.<br><br>
+        Дополнительный — <strong>английский (en)</strong> для международной аудитории.<br><br>
+        Реализация: JSON-файлы переводов + JS-функция <code>t('key')</code>. Переключатель языка в хедере.
+      </p>
+    </div>
+    <div class="lang-col">
+      <h4>🇨🇱 Региональные форматы</h4>
+      <p>
+        <strong>Валюта:</strong> CLP (Peso Chileno) — без дробной части, формат: $12.990<br><br>
+        <strong>Дата:</strong> DD/MM/YYYY (чилийский стандарт)<br><br>
+        <strong>Телефон:</strong> +56 (XX) XXXX-XXXX<br><br>
+        <strong>Доставка:</strong> регионы Чили (Santiago, Valparaíso, Biobío и др.)<br><br>
+        <strong>RUT:</strong> поле для налогового номера в форме покупки
+      </p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-label">06 · Примерный план работ</div>
+  <div class="section-title">Этапы разработки</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-week"><div class="week-label">WEEK 1</div><div class="week-name">Фундамент</div></div>
+      <div class="timeline-card">
+        <div class="timeline-card-title">Проектирование и setup</div>
+        <div class="timeline-tasks">ERD-схема БД · Структура проекта · FastAPI boilerplate · PostgreSQL setup · Алembic init · Базовые модели</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week"><div class="week-label">WEEK 2</div><div class="week-name">Бэкенд core</div></div>
+      <div class="timeline-card">
+        <div class="timeline-card-title">Auth + Products API</div>
+        <div class="timeline-tasks">JWT регистрация/логин · CRUD продуктов и категорий · Загрузка изображений · Pydantic-схемы · Тестирование через Swagger</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week"><div class="week-label">WEEK 3</div><div class="week-name">Бэкенд бизнес</div></div>
+      <div class="timeline-card">
+        <div class="timeline-card-title">Cart + Orders + Payment</div>
+        <div class="timeline-tasks">API корзины · Оформление заказа · Интеграция Mercado Pago Sandbox · Webhook обработка · Email уведомления</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week"><div class="week-label">WEEK 4</div><div class="week-name">Фронтенд</div></div>
+      <div class="timeline-card">
+        <div class="timeline-card-title">UI — главные страницы</div>
+        <div class="timeline-tasks">Design system (CSS Variables, шрифты, цвета) · Главная страница · Каталог с фильтрами · Страница товара · Адаптивность</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week"><div class="week-label">WEEK 5</div><div class="week-name">Фронтенд</div></div>
+      <div class="timeline-card">
+        <div class="timeline-card-title">UI — корзина и аккаунт</div>
+        <div class="timeline-tasks">Корзина · Checkout форма · Личный кабинет · Авторизация · Wishlist · Локализация ES/EN</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week"><div class="week-label">WEEK 6</div><div class="week-name">Финиш</div></div>
+      <div class="timeline-card">
+        <div class="timeline-card-title">Деплой и полировка</div>
+        <div class="timeline-tasks">Railway / Render деплой · Seed данные · Admin panel · Тестирование · Документация README · Презентация</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIORITY LEGEND -->
+  <div style="display:flex;gap:20px;margin-bottom:30px;font-size:12px;color:var(--ink-muted);align-items:center;flex-wrap:wrap;">
+    <strong style="color:var(--ink);">Приоритет:</strong>
+    <span style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--rose);display:inline-block;"></span>Высокий (MVP)</span>
+    <span style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;"></span>Средний (v1.0)</span>
+    <span style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--ink-muted);display:inline-block;"></span>Низкий (nice-to-have)</span>
+    <span style="margin-left:auto;font-family:'DM Mono',monospace;">Нажми чекбокс — отметь выполненное ✓</span>
+  </div>
+
+</div><!-- /container -->
+
+<footer>BeautyShop Chile · Project Plan · Учебная практика · Powered by FastAPI + PostgreSQL</footer>
+
+<script>
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.module-check');
+    const checked = document.querySelectorAll('.module-check.checked');
+    document.getElementById('totalCount').textContent = all.length;
+    document.getElementById('checkedCount').textContent = checked.length;
+    const pct = all.length ? Math.round(checked.length / all.length * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>

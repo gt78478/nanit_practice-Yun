@@ -647,10 +647,27 @@ textarea {
   font-weight: 800;
 }
 
+.admin-tabs {
+  display: grid;
+  gap: 10px;
+}
+
 .admin-nav.active,
 .admin-nav:hover {
   background: #f6eee6;
   color: var(--ink);
+}
+
+.admin-store-link {
+  margin-top: auto;
+  border-color: rgba(209, 92, 118, 0.45);
+  background: rgba(209, 92, 118, 0.14);
+  color: #fff7f9;
+}
+
+.admin-store-link:hover {
+  background: #d15c76;
+  color: white;
 }
 
 .admin-main {

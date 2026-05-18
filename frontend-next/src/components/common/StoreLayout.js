@@ -258,10 +258,23 @@ export function StoreLayout({
           <span aria-hidden="true">LUME</span>
         </button>
         <div className="actions">
-          <LangSelect lang={lang} changeLang={changeLang} />
           {user && <span className="user">{user.email}</span>}
-          {user ? <button className="ghost" onClick={logout}>{t("logout")}</button> : <button className="ghost" onClick={() => router.push("/auth")}>{t("login")}</button>}
-          <button className="cart-pill" onClick={() => setCartOpen(true)}>{t("bag")} {cart.items.length}</button>
+          <div className="header-tools">
+            <LangSelect lang={lang} changeLang={changeLang} />
+            {user ? (
+              <button className="tool-button" type="button" onClick={logout} aria-label={t("logout")} title={t("logout")}>
+                <span aria-hidden="true">↪</span>
+              </button>
+            ) : (
+              <button className="tool-button" type="button" onClick={() => router.push("/auth")} aria-label={t("login")} title={t("login")}>
+                <span aria-hidden="true">↩</span>
+              </button>
+            )}
+            <button className="tool-button cart-tool" type="button" onClick={() => setCartOpen(true)} aria-label={t("bag")} title={t("bag")}>
+              <span aria-hidden="true">▢</span>
+              {cart.items.length > 0 && <strong>{cart.items.length}</strong>}
+            </button>
+          </div>
         </div>
       </header>
       {children}

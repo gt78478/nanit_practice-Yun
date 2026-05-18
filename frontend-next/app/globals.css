@@ -220,7 +220,7 @@ nav a {
 
 .actions {
   justify-content: flex-end;
-  gap: 10px;
+  gap: 14px;
 }
 
 .user {
@@ -232,14 +232,85 @@ nav a {
   white-space: nowrap;
 }
 
-.lang-select {
-  width: 74px;
-  min-height: 38px;
-  padding: 0 8px;
-  border-color: rgba(255, 244, 234, 0.22);
-  background: rgba(255, 244, 234, 0.1);
+.header-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid rgba(255, 244, 234, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 244, 234, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.lang-control,
+.tool-button {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 244, 234, 0.16);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 244, 234, 0.08);
   color: #fff4ea;
-  font-weight: 800;
+  overflow: hidden;
+}
+
+.lang-control:hover,
+.tool-button:hover {
+  border-color: rgba(215, 225, 173, 0.48);
+  background: rgba(215, 225, 173, 0.13);
+}
+
+.lang-control > span,
+.tool-button > span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.lang-select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: inherit;
+  padding: 0;
+  background: transparent;
+  color: transparent;
+  opacity: 0;
+}
+
+.lang-control::after {
+  content: attr(data-lang);
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  color: #d7e1ad;
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.cart-tool strong {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  min-width: 17px;
+  height: 17px;
+  border: 1px solid rgba(29, 22, 19, 0.8);
+  border-radius: 999px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #d7e1ad;
+  color: #211714;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
 }
 
 .hero {

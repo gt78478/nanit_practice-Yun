@@ -11,6 +11,12 @@ from app.services.serializers import product_to_read
 router = APIRouter()
 
 
+def split_filter(value: str | None) -> list[str]:
+    if not value:
+        return []
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
 @router.get("/products", response_model=ProductList)
 def products(
     db: Session = Depends(get_db),
@@ -31,14 +37,16 @@ def products(
     filters = []
     if q:
         filters.append(or_(Product.name.ilike(f"%{q}%"), Product.description.ilike(f"%{q}%")))
-    if category:
+    categories = split_filter(category)
+    brands = split_filter(brand)
+    if categories:
         stmt = stmt.join(Product.category)
         count_stmt = count_stmt.join(Product.category)
-        filters.append(Category.name == category)
-    if brand:
+        filters.append(Category.name.in_(categories))
+    if brands:
         stmt = stmt.join(Product.brand)
         count_stmt = count_stmt.join(Product.brand)
-        filters.append(Brand.name == brand)
+        filters.append(Brand.name.in_(brands))
     if min_price is not None:
         filters.append(Product.price_cents >= min_price)
     if max_price is not None:

@@ -22,7 +22,11 @@ function routeFromPath(pathname) {
 }
 
 function clean(obj) {
-  return Object.fromEntries(Object.entries(obj).filter(([, value]) => value));
+  return Object.fromEntries(
+    Object.entries(obj)
+      .map(([key, value]) => [key, Array.isArray(value) ? value.join(",") : value])
+      .filter(([, value]) => value),
+  );
 }
 
 export function useShopApp() {
@@ -36,7 +40,7 @@ export function useShopApp() {
   const [meta, setMeta] = useState({ categories: [], brands: [] });
   const [cart, setCart] = useState(emptyCart);
   const [orders, setOrders] = useState([]);
-  const [filters, setFilters] = useState({ q: "", category: "", brand: "" });
+  const [filters, setFilters] = useState({ q: "", category: [], brand: [] });
   const [cartOpen, setCartOpen] = useState(false);
   const [admin, setAdmin] = useState(emptyAdmin);
   const [error, setError] = useState(null);

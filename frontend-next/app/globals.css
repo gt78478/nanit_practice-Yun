@@ -651,6 +651,176 @@ h3 {
   grid-template-columns: minmax(180px, 280px) 160px 160px 42px;
 }
 
+.catalog-section {
+  max-width: 1480px;
+}
+
+.catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(210px, 260px) minmax(0, 1fr);
+  align-items: start;
+  gap: 38px;
+}
+
+.catalog-rail {
+  position: sticky;
+  top: 104px;
+  display: grid;
+  gap: 28px;
+  padding-top: 4px;
+}
+
+.search-line {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  min-height: 46px;
+  color: var(--ink);
+}
+
+.search-line::after,
+.filter-field::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: rgba(21, 17, 15, 0.24);
+}
+
+.search-line::before,
+.filter-field::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.search-line:focus-within::before,
+.filter-block.open .filter-field::before {
+  transform: scaleX(1);
+}
+
+.search-line span {
+  color: #9c7f70;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.search-line input,
+.filter-field input {
+  min-height: 42px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  outline: none;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.search-line input::placeholder,
+.filter-field input::placeholder {
+  color: rgba(98, 88, 82, 0.58);
+  font-weight: 600;
+}
+
+.filter-block {
+  display: grid;
+  gap: 0;
+}
+
+.filter-trigger {
+  min-height: 28px;
+  border: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.filter-trigger span {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.filter-trigger strong {
+  color: #9c7f70;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.filter-trigger i {
+  color: #9c7f70;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  transform: rotate(0deg);
+  transition: transform 180ms ease;
+}
+
+.filter-block.open .filter-trigger i {
+  transform: rotate(90deg);
+}
+
+.filter-field {
+  position: relative;
+}
+
+.filter-field input:disabled {
+  pointer-events: none;
+}
+
+.filter-options {
+  display: grid;
+  gap: 6px;
+  padding: 12px 0 2px;
+}
+
+.filter-options button {
+  min-height: 32px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--soft);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.filter-options button:hover,
+.filter-options button.active {
+  color: var(--ink);
+}
+
+.filter-options button.active::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 999px;
+  display: inline-block;
+  background: #9fb05f;
+  vertical-align: 1px;
+}
+
 input,
 select,
 textarea {
@@ -665,6 +835,24 @@ textarea {
 input,
 select {
   min-height: 42px;
+}
+
+.search-line input,
+.filter-field input {
+  min-height: 42px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  outline: none;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.filter-field input:disabled {
+  opacity: 1;
+  color: transparent;
 }
 
 textarea {
@@ -693,8 +881,16 @@ textarea {
   min-width: 0;
   aspect-ratio: 2 / 3;
   --product-copy-height: 118px;
+  --product-image-ratio: 2 / 3;
   background: transparent;
   overflow: hidden;
+  transition: aspect-ratio 220ms ease;
+}
+
+.product:hover,
+.product:focus-within {
+  aspect-ratio: var(--product-image-ratio);
+  z-index: 4;
 }
 
 .product-media {
@@ -1358,6 +1554,17 @@ th {
   .section-head {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .catalog-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .catalog-rail {
+    position: static;
+    max-width: 520px;
+    padding-top: 0;
   }
 
   .filters,

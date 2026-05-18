@@ -16,6 +16,8 @@ function stored(key) {
 function routeFromPath(pathname) {
   if (pathname === "/admin") return "admin";
   if (pathname === "/auth") return "auth";
+  if (pathname === "/catalog") return "catalog";
+  if (pathname === "/orders") return "orders";
   return "shop";
 }
 

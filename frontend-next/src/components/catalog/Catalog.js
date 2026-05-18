@@ -29,14 +29,28 @@ export function Catalog({ products, meta, filters, setFilters, t, addCart }) {
       <div className="product-grid">
         {products.length ? products.map((product) => (
           <article className="product" key={product.id}>
-            <div className="product-media"><img src={product.image_url} alt={product.name} /></div>
+            <div className="product-media">
+              <div className="product-badges" aria-hidden="true">
+                <span className="flash-badge">↯</span>
+                <span className="hit-badge">HIT</span>
+              </div>
+              <button className="favorite-button" type="button" aria-label={t("favorite")}>♡</button>
+              <img src={product.image_url} alt={product.name} />
+              <button className="quick-cart" type="button" onClick={() => addCart(product.id)} aria-label={t("add")}>
+                <span aria-hidden="true">▢</span>
+              </button>
+            </div>
             <div className="product-body">
-              <div className="meta-row"><span>{product.category?.name || "Beauty"}</span><span>{product.brand?.name || ""}</span></div>
+              <div className="shade-row" aria-hidden="true">
+                <span className="shade warm" />
+                <span className="shade taupe" />
+                <span className="shade slate" />
+                <strong>+2</strong>
+              </div>
+              <div className="meta-row"><span>{product.category?.name || "Beauty"}</span></div>
               <h3>{product.name}</h3>
-              <p>{product.description || ""}</p>
               <div className="buy-row">
-                <strong>{clp(product.price_cents)}</strong>
-                <div className="card-actions"><button className="primary small" onClick={() => addCart(product.id)}>{t("add")}</button></div>
+                <strong>{t("fromPrice")} {clp(product.price_cents)}</strong>
               </div>
             </div>
           </article>

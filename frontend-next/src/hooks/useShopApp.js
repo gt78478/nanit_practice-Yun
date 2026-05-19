@@ -34,7 +34,7 @@ export function useShopApp() {
   const pathname = usePathname();
   const [token, setToken] = useState(() => stored("token"));
   const [, setRefreshToken] = useState(() => stored("refreshToken"));
-  const [lang, setLang] = useState(() => stored("lang") || "ru");
+  const [lang, setLang] = useState("ru");
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [meta, setMeta] = useState({ categories: [], brands: [] });
@@ -122,6 +122,11 @@ export function useShopApp() {
   useEffect(() => {
     loadBase().catch(setError);
   }, [filters]);
+
+  useEffect(() => {
+    const savedLang = stored("lang");
+    if (savedLang) setLang(savedLang);
+  }, []);
 
   useEffect(() => {
     if (route === "admin" && user?.role === "admin") {
